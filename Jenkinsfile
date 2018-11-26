@@ -3,6 +3,10 @@ node {
     git url: 'https://github.com/Grognak/HelloJenkins.git'
 
     stage 'Build and Test'
-    def mvnHome = tool 'M3'
-    sh "${mvnHome}/bin/mvn -B clean install"
+    withMaven(
+        maven: 'M3',
+        mavenSettingsConfig: 'my-maven-settings',
+        mavenLocalRepo: '.repository') {
+        sh "mvn clean install"
+    }
 }
