@@ -7,7 +7,9 @@ pipeline {
   
   stages {
     stage('Install') {
-      sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+      steps {
+        sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
+      }
     }
     post {
       always {
